@@ -7,8 +7,8 @@ locals {
   regex = "/[^0-9A-Za-z-_.]/" # Anti-pattern to match all characters not in: 0-9, a-z, A-Z, -, _, .
   
   userDefinedString_replaced = [
-    for userDefinedString in var.resource_groups: 
-    replace(userDefinedString, "-", "_")
+    for item in var.resource_groups: 
+    replace(item.userDefinedString, "-", "_")
   ]
   
   names = [
