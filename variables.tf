@@ -30,3 +30,8 @@ variable "location" {
 variable "tags" {
   description = "(Required) tags for the deployment"
 }
+
+variable "maxLength" {
+  default = 90
+  type    = number
+}
