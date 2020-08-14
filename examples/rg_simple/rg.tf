@@ -1,11 +1,34 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 2.19.0"
+    }
+  }
+  required_version = ">= 0.13"
+}
+
 provider "azurerm" {
-  version = "=2.0.0"
   features {}
 }
-module "rg_test" {
-  source = "../../"
-  
-    prefix = local.prefix
-    resource_groups = local.resource_groups
-    tags = local.tags
+
+locals {
+  rglist = {
+    1 = {
+      userDefinedString = "test_1"
+    },
+    2 = {
+      userDefinedString = "test_2"
+    },
+  }
+}
+
+module resource_groups_L1 {
+  source   = "../../"
+  for_each = local.rglist
+
+  userDefinedString = each.value.userDefinedString
+  env               = "test"
+  location          = lookup(each.value, "location", "canadacentral")
+  tags              = lookup(each.value, "tags", {})
 }
