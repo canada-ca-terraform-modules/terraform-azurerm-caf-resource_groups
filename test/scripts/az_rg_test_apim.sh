@@ -1,1 +1,0 @@
-az graph query -q "ResourceContainers | where type =~ 'microsoft.resources/subscriptions/resourcegroups' | where name == 'test-apim-demo'| where tags['module'] =~'terraform-azurerm-caf-resource-group'" -o json | jq 'length'

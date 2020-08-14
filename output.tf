@@ -1,8 +1,12 @@
 output "object" {
-  description = "Returns the full set of resource group objects created"
-  depends_on  = [azurerm_resource_group.rg]
-
+  description = "Returns the resource group objects created"
   value = azurerm_resource_group.rg
 }
 
+output "name" {
+  value = azurerm_resource_group.rg.name
+}
 
+output "id" {
+  value = azurerm_resource_group.rg.id
+}
