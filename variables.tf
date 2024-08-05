@@ -35,8 +35,3 @@ variable "tags" {
   type = map(string)
   default = {}
 }
-
-# variable "maxLength" {
-#   default = 90
-#   type    = number
-# }
