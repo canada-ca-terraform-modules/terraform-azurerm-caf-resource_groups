@@ -1,79 +1,44 @@
-# Creates one or multiple resource groups
-Sets one or more resource groups, each of them in a specific Azure region.
+## Requirements
 
-Reference the module to a specific version (recommended):
-```hcl
-module resource_groups {
-  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-resource_groups?ref=v1.0.0"
-  resource_groups = {
-    AutomationAccount-rg = { userDefinedString = "${var.project}_AutomationAccount" },
-    Backups-rg           = { userDefinedString = "${var.project}_Backups" },
-    Network-rg           = { userDefinedString = "${var.project}_Network" },
-    Keyvault-rg          = { userDefinedString = "${var.project}_Keyvault" },
-    Logs-rg              = { userDefinedString = "${var.project}_Logs" },
-    test-rg              = { userDefinedString = "${var.project}_test" },
-    DNS-rg               = { userDefinedString = "${var.project}_DNS" },
-    Management-rg        = { userDefinedString = "${var.project}_Management" },
-  }
-  env      = var.env
-  location = var.location
-  tags     = var.tags
-}
+No requirements.
 
-locals {
-  resource_groups = module.resource_groups.object
-}
-```
+## Providers
 
-## Refering to resource groups
+| Name |
+|------|
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) |
 
-```
-resource_group = local.resource_groups.DNS.rg
-```
 
-## Inputs 
+## Resources
 
-| Name              | Type   | Default | Description                                                                                                                          |
-| ----------------- | ------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| resource_group    | object | None    | (Required) The resource group object where to create the resource. Changing this forces a new resource to be created.                |
-| location          | string | None    | (Required) The location the all resource groups are created in. Can be overruled by configuring a location in the resource_group map |
-| tags              | map    | None    | (Required) Map of tags for the deployment. Additional tags per group can be added in the resource_group map                          |
-| env               | string | None    | (Required) env name                                                                                                                  |
-| userDefinedString | string | None    | (Required) userDefinedString to be Used.                                                                                             |
+| Name | Type |
+|------|------|
+| [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_env"></a> [env](#input\_env) | (Required) Environment for the resource group | `string` | n/a | yes |
+| <a name="input_group"></a> [group](#input\_group) | (Required) Group field of the subscription. | `string` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | Location for the deployment. Can be overruled by defining location in individual resource groups map structure | `string` | `"canadacentral"` | no |
+| <a name="input_project"></a> [project](#input\_project) | (Required) Name of the project that resource group belongs to. Will be used to format the name | `string` | n/a | yes |
+| <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | (Required) Object containing resource groups paramaters | `any` | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | (Required) tags for the deployment | `map(string)` | `{}` | no |
+| <a name="input_userDefinedString"></a> [userDefinedString](#input\_userDefinedString) | (Required) User Defined string that will be in the name of the resource group. Must be unique within a subscription | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_id"></a> [id](#output\_id) | Returns the id of the resource group |
+| <a name="output_location"></a> [location](#output\_location) | Returns the location of the resource group |
+| <a name="output_name"></a> [name](#output\_name) | Returns the name of the resource group |
+| <a name="output_resource-group-object"></a> [resource-group-object](#output\_resource-group-object) | Returns the resource group object created |
+| <a name="output_tags"></a> [tags](#output\_tags) | Returns the tags of the resource groups |
 
 ## Parameters
 
-### resource_groups
-(Required) Object that describes the resource groups to be created with their geo. 
-Global group of tags will be added to all RG, specific tags can be added per RG.
-
-```hcl
-variable "resource_groups" {
-  description = "(Required) Map of the resource groups to create"
-}
-```
-
-Example of structure: 
-```hcl
-resource_groups = {
-    apim          = { 
-                    name     = "-apim-demo"
-    },
-    networking    = {    
-                    name     = "-networking-demo"
-    },
-    insights      = { 
-                    name     = "-insights-demo"
-                    location = "francecentral" 
-                    tags     = {
-                      special     = "France location needed"
-                      approver     = "Gunter"
-                    }   
-    },
-}
-```
-
-# Outputs
-| Name   | Type   | Description                                                   |
-| ------ | ------ | ------------------------------------------------------------- |
-| object | object | Returns the full set of created resource groups as an object. |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_tags"></a> [tags](#input\_tags) | Custom tags | `map(string)` | `{}` | no |
