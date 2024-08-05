@@ -8,9 +8,6 @@
 # .tfplan files
 *.tfplan
 
-# .tfvars files
-*.tfvars
-
 #vscode
 .vscode/*
 !.vscode/settings.json
