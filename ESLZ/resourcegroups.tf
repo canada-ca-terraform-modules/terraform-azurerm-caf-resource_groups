@@ -5,7 +5,7 @@ variable "resourceGroups" {
 }
 
 module "resource_groups_L2" {
-  source = "/home/max/devops/modules/terraform-azurerm-caf-resource_groups"
+  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-resource_groups.git?ref=v2.0.1"
   for_each = var.resourceGroups
 
   userDefinedString = each.key
