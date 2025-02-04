@@ -1,3 +1,8 @@
+# AzureRM Resource Group V2
+
+[.ESLZ/resourcegroups.tfvars](.ESLZ/resourcegroups.tfvars)
+
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 No requirements.
@@ -42,3 +47,4 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_tags"></a> [tags](#input\_tags) | Custom tags | `map(string)` | `{}` | no |
+<!-- END_TF_DOCS -->

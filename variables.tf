@@ -3,6 +3,18 @@ variable "env" {
   type = string
 }
 
+variable "customName" {
+  description = "(Optional) Custom name for the resource group. If not provided, the name will be generated based on the project and env variables"
+  type = string
+  default = null
+}
+
+variable "customTags" {
+  description = "(Optional) Custom tags to add to the resource group"
+  type = map(string)
+  default = {}
+}
+
 variable "userDefinedString" {
   description = "(Required) User Defined string that will be in the name of the resource group. Must be unique within a subscription"
   type = string
@@ -18,16 +30,16 @@ variable "group" {
   type = string
 }
 
-variable "resource_group" {
-  description = "(Required) Object containing resource groups paramaters"
-  type = any
-  default = {}
-}
-
 variable "location" {
   description = "Location for the deployment. Can be overruled by defining location in individual resource groups map structure"
   type = string
   default = "canadacentral"
+}
+
+variable "managed_by" {
+  description = "(Optional) The ID of the resource that manages this resource group."
+  type = string
+  default = null
 }
 
 variable "tags" {

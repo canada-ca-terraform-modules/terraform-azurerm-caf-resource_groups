@@ -1,3 +1,9 @@
+## v2.1.0 (Feb 4 2024)
+- Add support for optional customName for resource group
+- Add support for optional managed_by parameter
+- Remove useless test code
+- Add auto documentation pipeline
+
 ## v2.0.0 (Aug 2024)
 New module standard
 

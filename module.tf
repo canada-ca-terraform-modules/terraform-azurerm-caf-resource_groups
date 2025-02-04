@@ -1,5 +1,6 @@
 resource "azurerm_resource_group" "rg" {
-  name     = local.name
-  location = var.location
-  tags     = merge(local.tags, try(var.resource_group.tags, {}))
+  name       = var.customName == null ? local.name : var.customName
+  location   = var.location
+  managed_by = var.managed_by
+  tags       = merge(local.tags, var.customTags)
 }
