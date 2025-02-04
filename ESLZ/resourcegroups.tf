@@ -2,16 +2,13 @@ variable "resourceGroups" {
   description = "Resource groups to deploy"
   type        = any
   default = {
-    "AutomationAccount" = {
-      # customName        = "something_something_automation-rg" # (Optional) Custom name for the RG. Usefull if existing name does not match computed one
-      # managed_by        = "/some/adure/id"                    # (Optional) The ID of the resource or application that manages this Resource Group.
-    }
-    "Backups"    = {}
-    "Network"    = {}
-    "Keyvault"   = {}
-    "Logs"       = {}
-    "DNS"        = {}
-    "Management" = {}
+    "AutomationAccount" = {}
+    "Backups"           = {}
+    "Network"           = {}
+    "Keyvault"          = {}
+    "Logs"              = {}
+    "DNS"               = {}
+    "Management"        = {}
   }
 }
 
@@ -25,6 +22,7 @@ module "resource_groups_L1" {
   group             = var.group
   project           = var.project
   customName        = try(each.value.customName, null)
+  customTags        = try(each.value.customTags, {})
   managed_by        = try(each.value.managed_by, null)
   tags              = var.tags
 }
