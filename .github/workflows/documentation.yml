@@ -5,11 +5,7 @@ on:
     branches:
       - main
       - master
-  push:
-    branches:
-      - main
-      - master
-
+      
 jobs:
   docs:
     runs-on: ubuntu-latest
