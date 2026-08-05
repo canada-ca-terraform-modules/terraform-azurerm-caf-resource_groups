@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 1.9"
+}
+
 variable "resourceGroups" {
   description = "Resource groups to deploy"
   type        = any
@@ -13,7 +17,7 @@ variable "resourceGroups" {
 }
 
 module "resource_groups_L1" {
-  source   = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-resource_groups.git?ref=v2.1.0"
+  source   = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-resource_groups.git?ref=v2.2.0"
   for_each = var.resourceGroups
 
   userDefinedString = each.key
@@ -28,6 +32,8 @@ module "resource_groups_L1" {
 }
 
 locals {
+  # tflint-ignore: terraform_unused_declarations
   resource_groups_L1 = module.resource_groups_L1
-  resource_groups    = module.resource_groups_L1
+  # tflint-ignore: terraform_unused_declarations
+  resource_groups = module.resource_groups_L1
 }
