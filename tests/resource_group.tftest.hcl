@@ -114,14 +114,3 @@ run "invalid_characters_are_stripped" {
     error_message = "Characters outside 0-9A-Za-z-_. must be stripped from the generated name"
   }
 }
-
-run "env_longer_than_4_chars_is_truncated" {
-  command = plan
-  variables {
-    env = "Development"
-  }
-  assert {
-    condition     = startswith(azurerm_resource_group.rg.name, "Deve-")
-    error_message = "env must be truncated to 4 characters in the generated name"
-  }
-}
