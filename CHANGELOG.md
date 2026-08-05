@@ -18,6 +18,7 @@ Changed:
 Notes:
 - `azurerm_resource_group`'s schema (`name`, `location`, `managed_by`, `tags`) is unchanged between azurerm 3.x/4.x/5.0.1 — no code changes were required to `module.tf`, `variables.tf`, `locals.tf`, or `names.tf`. This upgrade is artifact/tooling-only (provider pin, tests, CI).
 - No breaking changes, no `moved` blocks needed, no removed variables to restore.
+- PR #4 review follow-up: SHA-pinned every `uses:` action reference in `terraform-ci.yml`, `documentation.yml`, and `release.yml` (with a version comment alongside each) for supply-chain security; added `timeout-minutes: 15` to the `terraform-ci.yml` job; added `env_longer_than_4_chars_is_truncated` test coverage for the `env_4 = substr(var.env, 0, 4)` truncation path; strengthened `long_user_defined_string_is_truncated` with a `startswith` prefix assertion so it can't pass on an empty/mangled name.
 
 ## v2.1.0 (Feb 4 2024)
 - Add support for optional customName for resource group

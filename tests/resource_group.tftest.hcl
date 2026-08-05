@@ -45,6 +45,17 @@ run "custom_location" {
   }
 }
 
+run "env_longer_than_4_chars_is_truncated" {
+  command = plan
+  variables {
+    env = "Development"
+  }
+  assert {
+    condition     = azurerm_resource_group.rg.name == "Deve-OPS_CORE_test_rg1-rg"
+    error_message = "env must be truncated to its first 4 characters (env_4) in the generated name"
+  }
+}
+
 run "custom_name_override" {
   command = plan
   variables {
@@ -86,6 +97,10 @@ run "long_user_defined_string_is_truncated" {
   assert {
     condition     = length(azurerm_resource_group.rg.name) <= 90
     error_message = "Generated name must never exceed 90 characters"
+  }
+  assert {
+    condition     = startswith(azurerm_resource_group.rg.name, "Dev-OPS_CORE_this_is_a_very_long")
+    error_message = "Truncated name must still start with the expected prefix, not be empty/mangled"
   }
 }
 
