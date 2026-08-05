@@ -1,3 +1,24 @@
+## v2.2.0 (Aug 5 2026)
+
+Upgrade to azurerm provider ~> 5.0 (target: 5.0.1).
+
+Added:
+- `providers.tf` pinning `azurerm ~> 5.0` and `required_version >= 1.9`
+- `.tflint.hcl` with `call_module_type = "local"`
+- `.gitattributes` enforcing LF line endings
+- `tests/resource_group.tftest.hcl` and `tests/upgrade_compat.tftest.hcl` (mock_provider, no Azure credentials needed)
+- `.github/workflows/terraform-ci.yml` (fmt, init, validate, test, tflint on every PR)
+- `.github/workflows/release.yml` (creates a GitHub release on merge, tagged from `ESLZ/resourcegroups.tf`'s `?ref=`)
+
+Changed:
+- `.gitignore` replaced with the standard template; `*.tfvars` is now ignored except `ESLZ/*.tfvars`
+- Bumped `.github/workflows/documentation.yml` action pins (`actions/checkout` v7.0.1, `terraform-docs/gh-actions` v1.4.1)
+- Bumped `ESLZ/resourcegroups.tf` module ref to `v2.2.0`
+
+Notes:
+- `azurerm_resource_group`'s schema (`name`, `location`, `managed_by`, `tags`) is unchanged between azurerm 3.x/4.x/5.0.1 — no code changes were required to `module.tf`, `variables.tf`, `locals.tf`, or `names.tf`. This upgrade is artifact/tooling-only (provider pin, tests, CI).
+- No breaking changes, no `moved` blocks needed, no removed variables to restore.
+
 ## v2.1.0 (Feb 4 2024)
 - Add support for optional customName for resource group
 - Add support for optional managed_by parameter

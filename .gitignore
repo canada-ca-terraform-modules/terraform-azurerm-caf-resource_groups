@@ -1,16 +1,22 @@
-#  Local .terraform directories
-**/.terraform/*
-
-# .tfstate files
+.terraform/
+.terraform.lock.hcl
 *.tfstate
 *.tfstate.*
-
-# .tfplan files
 *.tfplan
-
-#vscode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+# ignore all tfvars (may contain secrets)
+*.tfvars
+*.tfvars.json
+# keep ESLZ example files tracked
+!ESLZ/*.tfvars
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
