@@ -7,6 +7,7 @@ terraform {
     }
   }
 
+  # live-test workflow wired
   # Empty on purpose: the state file path is supplied at `terraform init`
   # time via `-backend-config="path=..."` (partial configuration), so the
   # target-branch checkout and the PR-branch checkout can point at the same
